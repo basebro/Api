@@ -68,7 +68,9 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="User")
      */
-    public function getLoginCheckAction() {}
+    public function getLoginCheckAction()
+    {
+    }
 
     /**
      * @Rest\Post("/register", name="user_register")
@@ -116,7 +118,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="User")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder) {
+    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
 
@@ -182,7 +185,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Board")
      */
-    public function getAllBoardAction(Request $request) {
+    public function getAllBoardAction(Request $request)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $boards = [];
@@ -239,7 +243,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Board")
      */
-    public function getBoardAction(Request $request, $id) {
+    public function getBoardAction(Request $request, $id)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $board = [];
@@ -296,31 +301,32 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Board")
      */
-    public function addBoardAction(Request $request) {
+    public function addBoardAction(Request $request)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $board = [];
         $message = "";
 
         try {
-           $code = 201;
-           $error = false;
-           $name = $request->request->get("name", null);
-           $user = $this->getUser();
+            $code = 201;
+            $error = false;
+            $name = $request->request->get("name", null);
+            $user = $this->getUser();
 
-           if (!is_null($name)) {
-               $board = new Board();
-               $board->setName($name);
-               $board->setUser($user);
+            if (!is_null($name)) {
+                $board = new Board();
+                $board->setName($name);
+                $board->setUser($user);
 
-               $em->persist($board);
-               $em->flush();
+                $em->persist($board);
+                $em->flush();
 
-           } else {
-               $code = 500;
-               $error = true;
-               $message = "An error has occurred trying to add new board - Error: You must to provide a board name";
-           }
+            } else {
+                $code = 500;
+                $error = true;
+                $message = "An error has occurred trying to add new board - Error: You must to provide a board name";
+            }
 
         } catch (Exception $ex) {
             $code = 500;
@@ -368,7 +374,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Board")
      */
-    public function editBoardAction(Request $request, $id) {
+    public function editBoardAction(Request $request, $id)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $board = [];
@@ -429,7 +436,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Board")
      */
-    public function deleteBoardAction(Request $request, $id) {
+    public function deleteBoardAction(Request $request, $id)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
 
@@ -522,7 +530,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Task")
      */
-    public function addTaskAction(Request $request) {
+    public function addTaskAction(Request $request)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $task = [];
@@ -535,7 +544,7 @@ class ApiController extends FOSRestController
             $description = $request->request->get("description", null);
             $status = $request->request->get("status", null);
             $priority = $request->request->get("priority", null);
-            $boardId= $request->request->get("board_id", null);
+            $boardId = $request->request->get("board_id", null);
 
             if (!is_null($title) && !is_null($description) && !is_null($status) && !is_null($priority) && !is_null($boardId)) {
                 $task = new Task();
@@ -625,7 +634,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Task")
      */
-    public function editTaskAction(Request $request, $id) {
+    public function editTaskAction(Request $request, $id)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
         $task = [];
@@ -703,7 +713,8 @@ class ApiController extends FOSRestController
      *
      * @SWG\Tag(name="Task")
      */
-    public function deleteTaskAction(Request $request, $id) {
+    public function deleteTaskAction(Request $request, $id)
+    {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
 
