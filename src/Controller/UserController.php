@@ -5,10 +5,8 @@
  * API Controller
  *
  * @category   Controller
- * @package    MyKanban
- * @author     Francisco Ugalde
- * @copyright  2018 www.franciscougalde.com
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @package    Api
+ * @author     Christian Acevedo
  */
 
 namespace App\Controller;
@@ -155,7 +153,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/v1/showAll", name="user_show_all")
+     * @Rest\Get("/v1/showAllUsers", name="users_show_all")
      *
      * @SWG\Response(
      *     response=200,
@@ -170,7 +168,7 @@ class UserController extends FOSRestController
      *
      * @SWG\Tag(name="User")
      */
-    public function showUserAction(Request $request, UserPasswordEncoderInterface $encoder)
+    public function showAllUsersAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $serializer = $this->get('jms_serializer');
         $em = $this->getDoctrine()->getManager();
